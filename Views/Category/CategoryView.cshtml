@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Exptracker2.Models.Category>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<h2 align="center"> Category View</h2>
+
+<p>
+    <a asp-controller="Category" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cat_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Catname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Catexplimit)
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cat_Id)
+                </td>
+                <td>
+                    <a asp-action="Dashboard" asp-controller="Exp">@Html.DisplayFor(modelItem => item.Catname)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Catexplimit)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Cat_Id">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Cat_Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model Exptracker2.Models.Expense
+
+
+<html>
+<head>
+
+</head>
+<body>
+
+    <h2 align="left">Add Expenses</h2>
+    <br />
+
+    <form class="form-control-plaintext" align="justify" asp-action="Expform" asp-controller="Expense">
+        <div class="row-cols-5">
+            <div class="col-md-4">
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title" class="form-control" placeholder="Enter Title">
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Descr"></label>
+                <textarea asp-for="Descr" class="form-control" placeholder="Enter Description"> </textarea>
+                @Html.ValidationMessageFor(model => model.Descr, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Amt"></label>
+                <input type="number" asp-for="Amt" class="form-control" placeholder="Enter amount">
+                @Html.ValidationMessageFor(model => model.Amt, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Cat_Id"></label>
+                <select asp-for="Cat_Id" class="form-control  mb-3 mt-2 form-select" asp-items="@ViewBag.CategoryList">
+                    <option>-- Select Category --</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <input type="submit" value="Add Expense" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </form>
+    @if (TempData["ResultOk"] != null)
+    {
+
+        <script type="text/javascript">
+            alert("@TempData["ResultOk"]");
+        </script>
+
+
+    }
+    @if (TempData["AlertMsg"] != null)
+    {
+
+        <script type="text/javascript">
+            alert("@TempData["AlertMsg"]");
+        </script>
+
+
+    }
+
+
+</body>
+</html>
+
+
+
+
+
+
+

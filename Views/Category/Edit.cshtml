@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model Exptracker2.Models.Category
+<html>
+<head>
+</head>
+<body>
+    <h2 align="center"> Edit Category </h2>
+
+    <form class="form-control-plaintext" align="justify" asp-action="Edit" asp-controller="Category">
+
+
+        @Html.HiddenFor(x=> x.Cat_Id)
+        <div class="row-cols-5">
+            <div class="col-md-4">
+                <label asp-for="Catname"></label>
+                <input asp-for="Catname" class="form-control" placeholder="Enter Category Name">
+                @Html.ValidationMessageFor(model => model.Catname, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Catexplimit"></label>
+                <input asp-for="Catexplimit" class="form-control" placeholder="Enter Category Expense lImit">
+                @Html.ValidationMessageFor(model => model.Catexplimit, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <input type="submit" value="Update Category" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+@if (TempData["ResultOk"] != null)
+{
+
+    <script type="text/javascript">
+        alert("@TempData["ResultOk"]");
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Html.HiddenFor(x=> x.Cat_Id)

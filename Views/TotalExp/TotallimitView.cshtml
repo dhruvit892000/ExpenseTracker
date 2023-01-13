@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Exptracker2.Models.TotalExplim>
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2 align="center"> Total Limit View</h2>
+
+
+@if (TempData["Alert deletelimit"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Deleted !</strong>  @TempData["Alert deletelimit"]
+    </div>
+}
+<p>
+    <a asp-controller="TotalExp" asp-action="Totallimitform">Createnew Total Limit</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpLimit_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expense_Limit_Amt)
+            </th>
+            <th>Edit</th>
+           @* <th>Delete</th>*@
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpLimit_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expense_Limit_Amt)
+                </td>
+
+                <td>
+                    <a class="btn btn-outline-info" asp-action="TotallimitEdit" asp-route-id="@item.ExpLimit_Id">Edit</a>
+                </td>
+               @*<td>
+                    <a class="btn btn-outline-danger" asp-action="TotallimiDelete" asp-route-id="@item.ExpLimit_Id">Delete</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

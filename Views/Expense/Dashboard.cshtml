@@ -1,0 +1,222 @@
+﻿@*@model IEnumerable<Exptracker2.Models.Expense>*@
+@model Mergemod
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["alert"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["alert"]
+    </div>
+}
+@if (TempData["alertedit"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["alertedit"]
+    </div>
+}
+@if (TempData["Alert message"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>  @TempData["Alert message"]
+    </div>
+}
+@if (TempData["Alert update"] != null)
+{
+    <div class="alert alert-info">
+        <strong>Updated !</strong>  @TempData["Alert update"]
+    </div>
+}
+@if (TempData["Alert delete"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Deleted !</strong>  @TempData["Alert delete"]
+    </div>
+}
+@if (TempData["Alert addcat"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>  @TempData["Alert addcat"]
+    </div>
+}
+@if (TempData["Alert updatecat"] != null)
+{
+    <div class="alert alert-info">
+        <strong>Updated !</strong>  @TempData["Alert updatecat"]
+    </div>
+}
+@if (TempData["Alert deletecat"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Deleted !</strong>  @TempData["Alert deletecat"]
+    </div>
+}
+@if (TempData["Alert addlimit"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>  @TempData["Alert addlimit"]
+    </div>
+}
+@if (TempData["Alert editlimit"] != null)
+{
+    <div class="alert alert-info">
+        <strong>Updated !</strong>  @TempData["Alert editlimit"]
+    </div>
+}
+<html>
+    <head></head>
+<body>
+    <h1 align="center">Welcome to Dashboard</h1><br /><br /><br /><br />
+
+      <div class="row-cols-2">
+            <div class="col-md-4">
+               <h3 align="left">Category List</h3><br /><br />
+          </div>
+      </div>
+    <p>
+        <a asp-controller="Category" asp-action="Create">Add New Category</a>
+    </p>
+      <table class="table table-hover">
+        <thead>
+            <tr>
+                @*<th>Cat_Id</th>*@
+                <th>Catname</th>
+                <th>Catexplimit</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model.cat)
+            {
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Cat_Id)
+                    </td>*@
+
+                    <td>
+                        <a href="@Url.Action("Dashboard","Expense", new{id = item.Cat_Id})" class="btn btn-outline-light"> @item.Catname</a>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Catexplimit)
+                    </td>
+
+
+                    <td>
+                        <a class="btn btn-outline-warning" asp-action="Edit" asp-controller="Category" asp-route-id="@item.Cat_Id">Edit</a>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Category" asp-route-id="@item.Cat_Id">Delete</a>
+                    </td>
+
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    <br /><br /><br /><br />
+
+
+    <h3 align="left">Expense List</h3><br /><br />
+
+  <p>
+        <a asp-controller="Expense" asp-action="Expform">Add Expense</a>
+
+   </p>
+    <table class="table table-hover">
+   <thead>
+        <tr>
+            @*<th>
+                    Exp_Id
+            </th>*@
+             <th>
+                    Expense Title
+            </th>
+
+             <th>
+                   Description
+            </th>
+            <th>
+                  DateTime
+            </th>
+             <th>
+                    Amt
+            </th>
+            <th>
+                   Category
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+                
+      </tr>
+   </thead>
+    <tbody>
+        @foreach (var item in Model.exp)
+        {
+            <tr>
+               
+               
+               @*<td>
+                    @Html.DisplayFor(modelItem => item.Exp_Id)
+                </td>*@
+                 
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Expense_date)
+                    </td>
+                  
+                    <td>
+                      @Html.DisplayFor(modelItem => item.Amt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Catname)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-outline-warning" asp-action="Editexp" asp-route-id="@item.Exp_Id">Edit</a>
+
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-danger" asp-action="Deleteexp" asp-route-id="@item.Exp_Id">Delete</a>
+                    </td>
+
+
+            </tr>
+        }
+       
+    
+    </tbody>
+    </table>
+    <br />
+    <br />
+    <br />
+    <br />
+
+   <table>
+
+        <tr>
+            <td align="left" style="font-size:30px;" width="70%"> Expenses Total = @Model.exp.Sum(i=>i.Amt)</td>
+
+            <td align="left" style="font-size:30px;" width="90%">Total Expense Limit = @TempData["texpl"]</td>
+            @foreach (var item in Model.texplim)
+            {
+                <td align="left" style="font-size:30px;" width="70%"><a asp-controller="TotalExp" asp-action="TotallimitEdit" asp-route-id="@item.ExpLimit_Id"  class=" btn btn-outline-warning">Edit</a></td>
+            }
+     
+          
+               
+        </tr>
+    </table>
+</body>
+</html>

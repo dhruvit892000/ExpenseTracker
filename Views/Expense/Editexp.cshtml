@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@model Exptracker2.Models.Expense
+<html>
+<head>
+</head>
+<body>
+    <h2 align="center"> Edit Expense </h2>
+
+    <form method="post" class="form-control-plaintext" align="justify" asp-action="Editexp" asp-controller="Expense">
+        <div class="row-cols-5">
+            <div class="col-md-4">
+                @Html.HiddenFor(x=> x.Exp_Id)
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title" class="form-control" placeholder="Enter Title">
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Descr"></label>
+                <textarea asp-for="Descr" class="form-control" placeholder="Enter Description"> </textarea>
+                @Html.ValidationMessageFor(model => model.Descr, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Expense_date"></label>
+                <input type="datetime-local" asp-for="Expense_date" class="form-control" placeholder="select date">
+
+                @Html.ValidationMessageFor(model => model.Expense_date, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Amt"></label>
+                <input type="number" asp-for="Amt" class="form-control" placeholder="Enter amount">
+                @Html.ValidationMessageFor(model => model.Amt, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <label asp-for="Cat_Id"></label>
+                <select asp-for="Cat_Id" class="form-control  mb-3 mt-2 form-select" asp-items="@ViewBag.CatTbl">
+                    <option>-- Select --</option>
+
+                </select>
+                @Html.ValidationMessageFor(model => model.Cat_Id, "", new { @class = "text-danger" })<br /><br />
+            </div>
+        </div>
+
+        <div class="row-cols-2">
+            <div class="col-md-4">
+                <input type="submit" value="Update Record" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+

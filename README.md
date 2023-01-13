@@ -9,7 +9,7 @@
 <p>- Microsoft.EntityFrameworkCore(7.0.1)</p>
 <p>- Microsoft.EntityFrameworkCore.SqlServer(7.0.1)</p>
 <p>- Microsoft.EntityFrameworkCore.Tools(7.0.1)</p>
-<p>- Microsoft.VisualStudio.Web.CodeGeneration.Design(6.0.11)</p>
+<p>- Microsoft.VisualStudio.Web.CodeGeneration.Design(7.0.1)</p>
 
 <h2># Connection String(appsettings.json) :- </h2>
 
